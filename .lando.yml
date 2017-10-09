@@ -1,0 +1,19 @@
+name: d8-deployment
+recipe: drupal8
+config:
+  php: '7.1'
+  via: nginx
+  webroot: web
+  drush: stable
+  drupal: true
+  xdebug: true
+  database: mariadb:10.3
+
+events:
+  post-start:
+  - appserver: cd $LANDO_MOUNT && composer install
+  - appserver: cd $LANDO_MOUT && ln -s ./web/modules/custom ./drupal/modules
+  - appserver: cd $LANDO_MOUT && ln -s ./web/modules/themes ./drupal/themes
+  - appserver: cd $LANDO_MOUT && ln -s ./web/sites/config/sync ./drupal/config
+  - appserver: cd $LANDO_MOUNT && composer update
+  - appserver: cd $LANDO_MOUNT && composer dump-autoload
