@@ -1,0 +1,5 @@
+name: Worker Module
+description: 'Test moduler for Drupal Query Worker'
+packages: Custom
+type: module
+core: 8.x

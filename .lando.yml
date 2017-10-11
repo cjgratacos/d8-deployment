@@ -2,18 +2,36 @@ name: d8-deployment
 recipe: drupal8
 config:
   php: '7.1'
-  via: nginx
+  via: apache
   webroot: web
   drush: stable
   drupal: true
   xdebug: true
   database: mariadb:10.3
 
+services:
+  appserver:
+    environment:
+      DB_HOST: database
+      DB_USER: drupal8
+      DB_PASSWORD: drupal8
+      DB_NAME: drupal8
+      DB_PORT: 3306
+  database:
+    portforward: 3307
+    creds:
+      user: drupal8
+      password: drupal8
+      database: drupal8
+# put this somewhere on the lando event
+# drush si --db-url=mysql://drupal8:drupal8@database:3306/drupal8 --account-pass=12345
 events:
   post-start:
   - appserver: cd $LANDO_MOUNT && composer install
-  - appserver: cd $LANDO_MOUT && ln -s ./web/modules/custom ./drupal/modules
-  - appserver: cd $LANDO_MOUT && ln -s ./web/modules/themes ./drupal/themes
-  - appserver: cd $LANDO_MOUT && ln -s ./web/sites/config/sync ./drupal/config
+  - appserver: mkdir -p  $LANDO_WEBROOT/sites/config
+  - appserver: ln -sf $LANDO_MOUNT/drupal/modules $LANDO_WEBROOT/modules/custom
+  - appserver: ln -sf $LANDO_MOUNT/drupal/themes $LANDO_WEBROOT/themes/custom
+  - appserver: ln -sf $LANDO_MOUNT/drupal/config $LANDO_WEBROOT/sites/config/sync
   - appserver: cd $LANDO_MOUNT && composer update
-  - appserver: cd $LANDO_MOUNT && composer dump-autoload
+  - appserver: cd $LANDO_MOUNT && composer dump-autoload -o
+  # - appserver: "cd $LANDO_MOUNT && drush si --db-url=mysql://$DB_USERNAME:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME --account-pass=12345 -n -q || :"

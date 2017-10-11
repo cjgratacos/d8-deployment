@@ -5,16 +5,20 @@
     "license": "GPL-2.0+",
     "authors": [
         {
-            "name": "",
-            "role": ""
+            "name": "Carlos Gratacos",
+            "role": "Code Wizard and Scientist"
         }
     ],
-    "repositories": [
-        {
+    "repositories": {
+        "drupal8": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+         "packagist": {
+            "type": "composer",
+            "url": "https://packagist.org"
         }
-    ],
+    },
     "require": {
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6",

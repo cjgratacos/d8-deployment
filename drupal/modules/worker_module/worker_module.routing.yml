@@ -1,0 +1,7 @@
+worker_module.lead_form:
+  path: '/lead_form'
+  defaults:
+    _form: '\Drupal\worker_module\Form\LeadForm'
+    _title: 'The super lead form'
+  requirements:
+    _permission: 'access content'
