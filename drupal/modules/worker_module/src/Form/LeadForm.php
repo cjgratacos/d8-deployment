@@ -6,7 +6,6 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Queue\QueueInterface;
-use Drupal\worker_module\Model\LeadForm;
 
 /**
  * Class Lead Form
@@ -24,8 +23,8 @@ class LeadForm extends FormBase {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(array &$form, FormStateInterface $form_state){
-        $form['name'] = [
+    public function buildForm(array $form, FormStateInterface $form_state){
+        $form['username'] = [
             '#type' => 'textfield',
             '#attributes' => [
                 'placeholder' => 'Username'
@@ -56,15 +55,22 @@ class LeadForm extends FormBase {
     /**
      * {@inheritdoc}
      */
-    public function validateForm(array &$form, FormStateInterface $form_state){
+    public function validateForm(array &$form, FormStateInterface $form_state){}
+
+    public function submitForm(array &$form, FormStateInterface $form_state) {
         /** @var Drupal\Core\Queue\QueueFactory $queue_factory */
         $queue_factory = \Drupal::service('queue');
         /** @var Drupal\Core\Queue\QueueInterface $queue */
-        $queue = $queue_factory->get('email_processor');
-        $item = LeadForm::create()
-                    ->withId($form_state->getValue('username'))
-                    ->withEmail($form_state->getValue('email'))
-                    ->withBody($form_state->getValue('inquiry'));
-        $queue->createItem($item);
+        $queue = $queue_factory->get('lead_processor');
+        $item = new \StdClass();
+        $item->username = $form_state->getValue('username');
+        $item->email = $form_state->getValue('email');
+        $item->attempts = 0;
+        $item->inquiry = $form_state->getValue('inquiry');
+
+
+        for($i=0;$i<2000;$i++){
+            $queue->createItem($item);
+        }
     }
 }

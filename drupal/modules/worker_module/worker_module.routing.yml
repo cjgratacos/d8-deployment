@@ -5,3 +5,11 @@ worker_module.lead_form:
     _title: 'The super lead form'
   requirements:
     _permission: 'access content'
+
+worker_module.admin_lead_form:
+  path: '/admin/process/lead_form'
+  defaults:
+    _form: '\Drupal\worker_module\Form\ManualProcessLeadForm'
+    _title: 'The admin super lead form'
+  requirements:
+    _permission: 'administer site configutation'

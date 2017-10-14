@@ -1,37 +1,36 @@
-name: d8-deployment
+name: d8-project
 recipe: drupal8
+
 config:
   php: '7.1'
-  via: apache
+  via: nginx
   webroot: web
   drush: stable
   drupal: true
   xdebug: true
-  database: mariadb:10.3
+  database: mariadb
+
+proxy:
+  mailhog:
+    - mail.lemp.lndo.site
 
 services:
-  appserver:
-    environment:
-      DB_HOST: database
-      DB_USER: drupal8
-      DB_PASSWORD: drupal8
-      DB_NAME: drupal8
-      DB_PORT: 3306
   database:
     portforward: 3307
-    creds:
-      user: drupal8
-      password: drupal8
-      database: drupal8
-# put this somewhere on the lando event
-# drush si --db-url=mysql://drupal8:drupal8@database:3306/drupal8 --account-pass=12345
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+    portforward: 1026
+
 events:
   post-start:
   - appserver: cd $LANDO_MOUNT && composer install
-  - appserver: mkdir -p  $LANDO_WEBROOT/sites/config
-  - appserver: ln -sf $LANDO_MOUNT/drupal/modules $LANDO_WEBROOT/modules/custom
-  - appserver: ln -sf $LANDO_MOUNT/drupal/themes $LANDO_WEBROOT/themes/custom
-  - appserver: ln -sf $LANDO_MOUNT/drupal/config $LANDO_WEBROOT/sites/config/sync
   - appserver: cd $LANDO_MOUNT && composer update
   - appserver: cd $LANDO_MOUNT && composer dump-autoload -o
-  # - appserver: "cd $LANDO_MOUNT && drush si --db-url=mysql://$DB_USERNAME:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME --account-pass=12345 -n -q || :"
+
+# # # 
+# drush si --db-url=mysql://drupal8:drupal8@database:3306/drupal8 --account-pass=12345
+# ln -sfv ../../drupal/modules web/modules/custom
+# ln -sfv ../../drupal/themes web/themes/custom
+# ln -sfv ../../../drupal/config web/sites/config/sync
