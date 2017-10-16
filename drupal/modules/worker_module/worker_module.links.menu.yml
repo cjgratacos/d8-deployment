@@ -1,6 +1,0 @@
-worker_module.admin:
-  title: 'Manual lead form queue process'
-  description: 'Run the Lead Form queue processor manually'
-  parent: system.admin_config_system
-  route_name: worker_module.admin_lead_form
-  weight: 100
