@@ -1,0 +1,14 @@
+{
+  "name": "drupal/color_picker_field",
+  "type": "drupal-module",
+  "description": "Color Picker Field Implementation",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/color_picker_field",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/color_picker_field",
+    "source": "http://cgit.drupalcode.org/color_picker_field"
+  },
+  "require": { }
+}

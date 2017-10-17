@@ -1,0 +1,5 @@
+name: color_picker_field
+type: module
+description: Color Picker Field Implementation
+core: 8.x
+package: Custom

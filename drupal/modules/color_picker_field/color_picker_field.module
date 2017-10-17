@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains color_picker_field.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function color_picker_field_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the color_picker_field module.
+    case 'help.page.color_picker_field':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Color Picker Field Implementation') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function color_picker_field_theme() {
+  return [
+    'color_picker_field' => [
+      'render element' => 'children',
+    ],
+  ];
+}
