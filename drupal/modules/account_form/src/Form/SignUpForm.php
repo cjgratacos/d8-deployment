@@ -56,38 +56,41 @@ class SignUpForm extends FormBase {
           '#type' => 'email',
           '#default_value' => '',
           '#maxlenth' => 100,
-          '#required' => true
+          '#required' => true,
+          '#pattern' => '[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*'
         ];
+
         // We could use a Module like Password Policy here
         // Password
         $form['password'] = [
           '#type' => 'password',
           '#title' => $this->t('Password'),
           '#default_value' => '',
-          '#maxlenth' => 30,
+          '#minlenth' => 7,
           '#required' => true
         ];
+
         // Confirm Password
-        $form['confirm_password'] = [
-          '#type' => 'password',
-          '#title' => $this->t('Confirm Password'),
-          '#default_value' => '',
-          '#maxlenth' => 30,
+        $form['password_confirm'] = [
+          '#type' => 'password_confirm',
           '#required' => true
         ];
+
         // Phone Number
         $form['phone'] = [
           '#type' => 'tel',
             // A Custom CSS Class should be applied to the optional
-          '#title' => $this->t('Phone Number <span style="">(optional)</span>'),
+          '#title' => $this->t('Phone Number <span style="font-size: small;font-weight: normal;">(optional)</span>'),
           '#default_value' => '',
-          '#maxlenth' => 30,
-          '#required' => false
+          '#maxlenth' => 12,
+          '#required' => false,
+          '#pattern' => '(((\+[1-9]\d{0,2})[\-\s.](\d{1,3})|(((1\s)?)\(\d{3}\)))[\-\s.])?(\d{1,8})([\-\s.](\d{1,8})){1,4}(\sext\.\s\d{1,10})?'
         ];
 
         $form['security_group'] = [
           '#markup' => '<h2>Security Question</h2>'
         ];
+
         // Security Question
         $form['security_group']['question'] = [
           '#type' => 'select',
@@ -146,6 +149,7 @@ class SignUpForm extends FormBase {
               '@pp' => '/privacy-policy'
           ])
         ];
+
         return $form;
     }
 
@@ -175,7 +179,12 @@ class SignUpForm extends FormBase {
         ];
     }
 
-    protected function validateFirstName(array &$form, FormStateInterface $form_state) {
-
+    private function getPasswordConfiguration() {
+      return [
+        'confirmTitle' => t('Passwords match:'),
+        'confirmSuccess' => t('yes'),
+        'confirmFailure' => t('no'),
+        'showStrengthIndicator' => FALSE,
+      ];
     }
 }
