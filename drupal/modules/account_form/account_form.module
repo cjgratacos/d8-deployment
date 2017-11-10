@@ -28,13 +28,3 @@ function account_form_theme() {
     ],
   ];
 }
-
-/**
- * Implements hook_element_info_alter().
- */
-function account_form_element_info_alter(array &$types) {
-  if (isset($types['password_confirm']) &&
-    in_array('user_form_process_password_confirm', $types['password_confirm']['#process'])) {
-      unset($types['password_confirm']['#process']['user_form_process_password_confirm']);
-  }
-}

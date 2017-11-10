@@ -1,0 +1,20 @@
+uuid: acb2218a-4fba-4e6a-8217-ffa671ba6e68
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_user_phone
+  module:
+    - user
+id: user.user.field_user_phone
+field_name: field_user_phone
+entity_type: user
+bundle: user
+label: Phone
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
