@@ -1,0 +1,102 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "lando:rebuild",
+            "type": "shell",
+            "command": "lando rebuild -y",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "taskName": "lando:start",
+            "type": "shell",
+            "command": "lando start -y",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "taskName": "drupal:si",
+            "type": "shell",
+            "command": "cd web && drush si --db-url=mysql://drupal8:drupal8@database:3306/drupal8 --account-pass=12345",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "taskName": "drupal:link",
+            "type": "shell",
+            "command": "cd web && ln -sfv ../../drupal/modules web/modules/custom && ln -sfv ../../drupal/themes web/themes/custom && ln -sfv ../../../drupal/config web/sites/config/sync",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "taskName": "composer:install",
+            "type": "shell",
+            "command": "composer install",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "taskName": "composer:update",
+            "type": "shell",
+            "command": "composer update",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "taskName": "composer:dauto",
+            "type": "shell",
+            "command": "composer dump-autoload -o",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "taskName": "npm:build",
+            "type": "shell",
+            "command": "cd frontend && npm run-script build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {            
+            "taskName": "npm:start",
+            "type": "shell",
+            "command": "cd frontend && npm run-script start",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }
+    ]
+}
