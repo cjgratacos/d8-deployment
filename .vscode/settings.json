@@ -1,2 +1,6 @@
 {
+    "advancedNewFile.exclude":{
+        "node_modules":true,
+        "vendor":true
+    }
 }

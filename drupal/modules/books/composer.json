@@ -1,0 +1,11 @@
+{
+    "name": "drupal/books",
+    "description": "Books Module",
+    "authors": [
+        {
+            "name": "cjgratacos",
+            "email": "cjgratacos@gmail.com"
+        }
+    ],
+    "require": {}
+}

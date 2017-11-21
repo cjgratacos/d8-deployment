@@ -1,0 +1,5 @@
+name: books
+type: module
+description: Books Module containing all resources for a book
+core: 8.x
+package: Books Manager
