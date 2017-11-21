@@ -29,6 +29,7 @@
         "drupal/examples": "1.x-dev",
         "drupal/ultimate_cron": "^2.0@alpha",
         "drush/drush": "~8.0",
+        "friendsofphp/php-cs-fixer": "^2.8",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3"
     },
