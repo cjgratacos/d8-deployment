@@ -1,6 +1,11 @@
 {
-    "advancedNewFile.exclude":{
-        "node_modules":true,
-        "vendor":true
-    }
+    "phpcs.enable": true,
+    // Apply Drupal CS
+    "phpcs.standard": "Drupal",
+    "eslint.enable": true,
+    "eslint.workingDirectories": [
+        "./web", "./frontend"
+    ],
+    "eslint.packageManager": "yarn",
+    "eslint.autoFixOnSave": true
 }

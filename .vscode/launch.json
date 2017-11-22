@@ -9,8 +9,9 @@
             "type": "php",
             "request": "launch",
             "port": 9000,
-            "localSourceRoot": "${workspaceRoot}/web",
-            "serverSourceRoot": "/app/web"
+            "pathMappings": {
+              "/app/web": "${workspaceRoot}/web"
+            }
         }
     ]
 }
