@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "lando:rebuild",
+            "label": "lando:rebuild",
             "type": "shell",
             "command": "lando rebuild -y",
             "presentation": {
@@ -13,7 +13,7 @@
             }
         },
         {
-            "taskName": "lando:start",
+            "label": "lando:start",
             "type": "shell",
             "command": "lando start -y",
             "presentation": {
@@ -22,7 +22,7 @@
             }
         },
         {
-            "taskName": "drupal:si",
+            "label": "drupal:si",
             "type": "shell",
             "command": "cd web && drush si --db-url=mysql://drupal8:drupal8@database:3306/drupal8 --account-pass=12345",
             "presentation": {
@@ -31,7 +31,7 @@
             }
         },
         {
-            "taskName": "drupal:link",
+            "label": "drupal:link",
             "type": "shell",
             "command": "cd web && ln -sfv ../../drupal/modules web/modules/custom && ln -sfv ../../drupal/themes web/themes/custom && ln -sfv ../../../drupal/config web/sites/config/sync",
             "presentation": {
@@ -40,7 +40,7 @@
             }
         },
         {
-            "taskName": "composer:install",
+            "label": "composer:install",
             "type": "shell",
             "command": "composer install",
             "group": {
@@ -53,7 +53,7 @@
             }
         },
         {
-            "taskName": "composer:update",
+            "label": "composer:update",
             "type": "shell",
             "command": "composer update",
             "group": {
@@ -66,7 +66,7 @@
             }
         },
         {
-            "taskName": "composer:dauto",
+            "label": "composer:dauto",
             "type": "shell",
             "command": "composer dump-autoload -o",
             "group": {
@@ -81,7 +81,7 @@
             }
         },
         {
-            "taskName": "npm:build",
+            "label": "npm:build",
             "type": "shell",
             "command": "cd frontend && npm run-script build",
             "presentation": {
@@ -90,13 +90,23 @@
             }
         },
         {            
-            "taskName": "npm:start",
+            "label": "npm:start",
             "type": "shell",
             "command": "cd frontend && npm run-script start",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
             }
-        }
+        },
+        {
+            "label": "phpcs:fix",
+            "type": "shell",
+            "command": "~/.composer/vendor/bin/phpcbf ${file} --standard=Drupal"
+        },
+        {
+            "label": "phpcs:show",
+            "type": "shell",
+            "command": "~/.composer/vendor/bin/phpcs ${file} --standard=Drupal"
+        }    
     ]
 }

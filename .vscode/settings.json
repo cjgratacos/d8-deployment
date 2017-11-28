@@ -1,7 +1,15 @@
 {
+    "advancedNewFile.exclude": {
+        "node_modules": true,
+        "node_modules_electron": true,
+        "dev": true,
+        "dist": true
+    },
+    
+    // Apply Drupal CS and CS Fix
     "phpcs.enable": true,
-    // Apply Drupal CS
     "phpcs.standard": "Drupal",
+    // Apply JS Linting
     "eslint.enable": true,
     "eslint.workingDirectories": [
         "./web", "./frontend"

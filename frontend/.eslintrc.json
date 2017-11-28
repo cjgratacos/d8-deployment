@@ -23,7 +23,11 @@
 // }
 
 {
-    "extends": "eslint-config-airbnb",
+    "extends": [
+      "eslint-config-airbnb",
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
     "root": true,
     "env": {
       "browser": true,
